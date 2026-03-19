@@ -1,0 +1,232 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Redes Sociales</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+
+    body {
+      min-height: 100vh;
+      background: #0d1b4b;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      font-family: 'Segoe UI', Arial, sans-serif;
+      overflow: hidden;
+    }
+
+    h1 {
+      color: #ffffff;
+      font-size: 20px;
+      letter-spacing: 5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      opacity: 0.7;
+      position: relative;
+      z-index: 10;
+    }
+
+    p.subtitle {
+      color: rgba(255,255,255,0.4);
+      font-size: 13px;
+      letter-spacing: 2px;
+      margin-bottom: 50px;
+      position: relative;
+      z-index: 10;
+    }
+
+    /* ── Escena ── */
+    .scene {
+      position: relative;
+      width: 420px;
+      height: 380px;
+    }
+
+    /* ── Blob morado de fondo ── */
+    .blob {
+      position: absolute;
+      width: 280px;
+      height: 240px;
+      background: linear-gradient(135deg, #5b2be8, #7c3aed, #4f46e5);
+      border-radius: 60% 40% 55% 45% / 50% 60% 40% 50%;
+      top: 50%;
+      left: 55%;
+      transform: translate(-50%, -50%);
+      opacity: 0.85;
+      filter: blur(2px);
+    }
+
+    /* ── Arco blanco ── */
+    .arc {
+      position: absolute;
+      width: 260px;
+      height: 260px;
+      border: 1.5px solid rgba(255,255,255,0.25);
+      border-radius: 50%;
+      top: 50%;
+      left: 30%;
+      transform: translate(-50%, -50%);
+      clip-path: polygon(0 0, 50% 0, 50% 100%, 0 100%);
+    }
+
+    /* ── Icono base ── */
+    .icon {
+      position: absolute;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: #fff;
+      text-decoration: none;
+      box-shadow: 0 10px 30px rgba(0,0,0,0.4);
+      transition: transform 0.3s, box-shadow 0.3s;
+      cursor: pointer;
+      z-index: 5;
+    }
+
+    .icon:hover {
+      transform: scale(1.15) translateY(-6px) !important;
+      box-shadow: 0 20px 40px rgba(0,0,0,0.5);
+      z-index: 20;
+      animation: none !important;
+    }
+
+    /* Tamaños */
+    .lg { width: 100px; height: 100px; font-size: 44px; }
+    .md { width: 76px;  height: 76px;  font-size: 32px; }
+    .sm { width: 52px;  height: 52px;  font-size: 22px; }
+
+    /* Colores */
+    .whatsapp  { background: radial-gradient(circle at 35% 30%, #4cde7a, #25d366 55%, #128c4a); }
+    .instagram { background: radial-gradient(circle at 35% 30%, #f9b96e, #e1306c 50%, #833ab4); }
+    .facebook  { background: radial-gradient(circle at 35% 30%, #6aaef5, #1877f2 55%, #0d5fc0); }
+    .tiktok    { background: radial-gradient(circle at 35% 30%, #444, #1a1a1a 55%, #000); border: 2px solid #333; }
+    .snapchat  { background: radial-gradient(circle at 35% 30%, #ffe566, #fffc00 55%, #e6c800); }
+    .snapchat  i { color: #333; }
+    .spotify   { background: radial-gradient(circle at 35% 30%, #5cef82, #1db954 55%, #148a3d); }
+    .dribbble  { background: radial-gradient(circle at 35% 30%, #f76fa0, #ea4c89 55%, #c03070); }
+
+    /* Brillo en cada icono */
+    .icon::after {
+      content: '';
+      position: absolute;
+      top: 10%; left: 15%;
+      width: 38%; height: 30%;
+      background: rgba(255,255,255,0.28);
+      border-radius: 50%;
+      filter: blur(5px);
+      pointer-events: none;
+    }
+
+    /* Posiciones */
+    .whatsapp  { top: 22%;  left: 18%; animation: float1 4s ease-in-out infinite; }
+    .instagram { top: 4%;   left: 54%; animation: float2 4.5s ease-in-out infinite; }
+    .facebook  { top: 44%;  left: 40%; animation: float3 5s ease-in-out infinite; }
+    .tiktok    { top: 14%;  left: 4%;  animation: float4 3.8s ease-in-out infinite; }
+    .snapchat  { top: 38%;  left: 72%; animation: float1 4.2s ease-in-out infinite 0.5s; }
+    .spotify   { top: 8%;   left: 76%; animation: float2 3.5s ease-in-out infinite 1s; }
+    .dribbble  { top: 68%;  left: 18%; animation: float3 4.8s ease-in-out infinite 0.3s; }
+
+    /* Animaciones flotantes */
+    @keyframes float1 {
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-12px); }
+    }
+    @keyframes float2 {
+      0%,100% { transform: translateY(0px) rotate(0deg); }
+      50%      { transform: translateY(-10px) rotate(3deg); }
+    }
+    @keyframes float3 {
+      0%,100% { transform: translateY(0px); }
+      50%      { transform: translateY(-8px); }
+    }
+    @keyframes float4 {
+      0%,100% { transform: translateY(0px) rotate(0deg); }
+      50%      { transform: translateY(-14px) rotate(-4deg); }
+    }
+
+    /* Tooltip con nombre de la red */
+    .icon span.tooltip {
+      position: absolute;
+      bottom: -28px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: rgba(255,255,255,0.1);
+      backdrop-filter: blur(6px);
+      color: #fff;
+      font-size: 10px;
+      letter-spacing: 1px;
+      padding: 3px 10px;
+      border-radius: 20px;
+      white-space: nowrap;
+      opacity: 0;
+      transition: opacity 0.2s;
+      pointer-events: none;
+      font-style: normal;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+    .icon:hover span.tooltip { opacity: 1; }
+
+    /* Responsive */
+    @media (max-width: 480px) {
+      .scene { width: 320px; height: 300px; }
+      .lg { width: 76px; height: 76px; font-size: 32px; }
+      .md { width: 58px; height: 58px; font-size: 24px; }
+      .sm { width: 42px; height: 42px; font-size: 18px; }
+      h1 { font-size: 15px; }
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Encuéntranos en</h1>
+  <p class="subtitle">// nuestras redes sociales</p>
+
+  <div class="scene">
+
+    <div class="blob"></div>
+    <div class="arc"></div>
+
+    <a class="icon whatsapp lg" href="https://wa.me/1234567890" target="_blank">
+      <i class="fab fa-whatsapp"></i>
+      <span class="tooltip">WhatsApp</span>
+    </a>
+
+    <a class="icon instagram md" href="https://instagram.com" target="_blank">
+      <i class="fab fa-instagram"></i>
+      <span class="tooltip">Instagram</span>
+    </a>
+
+    <a class="icon facebook lg" href="https://facebook.com" target="_blank">
+      <i class="fab fa-facebook-f"></i>
+      <span class="tooltip">Facebook</span>
+    </a>
+
+    <a class="icon tiktok sm" href="https://tiktok.com" target="_blank">
+      <i class="fab fa-tiktok"></i>
+      <span class="tooltip">TikTok</span>
+    </a>
+
+    <a class="icon snapchat md" href="https://snapchat.com" target="_blank">
+      <i class="fab fa-snapchat"></i>
+      <span class="tooltip">Snapchat</span>
+    </a>
+
+    <a class="icon spotify sm" href="https://spotify.com" target="_blank">
+      <i class="fab fa-spotify"></i>
+      <span class="tooltip">Spotify</span>
+    </a>
+
+    <a class="icon dribbble sm" href="https://dribbble.com" target="_blank">
+      <i class="fab fa-dribbble"></i>
+      <span class="tooltip">Dribbble</span>
+    </a>
+
+  </div>
+
+</body>
+</html>
